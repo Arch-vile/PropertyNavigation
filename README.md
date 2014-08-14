@@ -37,9 +37,9 @@ Use in the GSP pages to have compile and refactor safe bindings to command objec
 
 Instead of:
 
-><g:textField name="player.name"/>
+`<g:textField name="player.name"/>`
 
 Use:
 
-><g:textField name="${prop(of(Command.class).getPlayer().getName()))}"/>
+`<g:textField name="${prop(of(Command.class).getPlayer().getName()))}"/>`
   
