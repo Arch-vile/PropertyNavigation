@@ -1,16 +1,16 @@
 PropertyNavigation
 ==================
 
-What:
+**What**
 Utility to create property expression by navigating object hierarchy.
 
-Why:
+**Why**
 So that you dont need to use static strings that contain risk of typos and are easily broken during refactoring.
 
-How:
+**How**
 Say you have a Book class that has Author as class variable (accessable by getter) and the Author has a name.
 
-  prop(of(Book.class).getAuthor().getName())
+>prop(of(Book.class).getAuthor().getName())
 
 Will return string "author.name".
 
