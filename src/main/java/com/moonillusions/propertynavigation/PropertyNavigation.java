@@ -9,17 +9,19 @@ import net.sf.cglib.proxy.MethodProxy;
 
 public class PropertyNavigation {
 
-	private static final ThreadLocal<StringBuilder> propertyPath = new ThreadLocal<StringBuilder>() {
+	private static final ThreadLocal<PropertyBuilder> propertyPath = new ThreadLocal<PropertyBuilder>() {
 		@Override
-		protected StringBuilder initialValue() {
-			return new StringBuilder();
+		protected PropertyBuilder initialValue() {
+			return new PropertyBuilder();
 		};
 	};
 
-	public static <T> T of(Class<T> clazz) {
-		PropertyNavigation.propertyPath.get().setLength(0);
-		PropertyNavigation.propertyPath.get().append(clazz.getSimpleName());
+	private static PropertyBuilder getPathBuilder() {
+		return PropertyNavigation.propertyPath.get();
+	}
 
+	public static <T> T of(Class<T> clazz) {
+		getPathBuilder().setRoot(clazz);
 		return navigate(clazz);
 	}
 
@@ -33,8 +35,7 @@ public class PropertyNavigation {
 			@Override
 			public Object intercept(Object obj, Method method, Object[] args,
 					MethodProxy proxy) throws Throwable {
-				PropertyNavigation.propertyPath.get().append(".")
-						.append(method.getName());
+				getPathBuilder().append(method);
 
 				if (Modifier.isFinal(method.getReturnType().getModifiers())) {
 					return proxy.invokeSuper(obj, args);
@@ -49,7 +50,7 @@ public class PropertyNavigation {
 	}
 
 	public static String prop(Object object) {
-		return PropertyNavigation.propertyPath.get().toString();
+		return getPathBuilder().toProperty();
 	}
 
 }
