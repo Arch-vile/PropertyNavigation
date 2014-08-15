@@ -45,4 +45,4 @@ Use:
   
 
 
-[Tests](/ra1p3/PropertyNavigation/blob/master/src/test/java/com/moonillusions/propertynavigation/PropertyNavigationTest.java)
+[Tests](https://github.com/ra1p3/PropertyNavigation/blob/master/src/test/java/com/moonillusions/propertynavigation/PropertyNavigationTest.java)
