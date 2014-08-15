@@ -43,3 +43,6 @@ Use:
 
 `<g:textField name="${prop(of(Command.class).getPlayer().getName()))}"/>`
   
+
+
+[Tests](/ra1p3/PropertyNavigation/blob/master/src/test/java/com/moonillusions/propertynavigation/PropertyNavigationTest.java)
