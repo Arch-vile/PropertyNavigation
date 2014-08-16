@@ -50,7 +50,9 @@ Use:
 
 **Known issues**
 Wont work for final classes in the middle of the path. E.g. in
+
 >prop(on(Person.class).getName().getBytes)
+
 where getName() returns a String which is final.
 
 
