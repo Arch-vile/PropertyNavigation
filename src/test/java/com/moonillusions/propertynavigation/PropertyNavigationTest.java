@@ -5,6 +5,7 @@ import static com.moonillusions.propertynavigation.PropertyNavigation.prop;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class PropertyNavigationTest {
@@ -40,6 +41,13 @@ public class PropertyNavigationTest {
 	public void deep_primitive() {
 		assertThat(prop(of(Book.class).getAuthor().getBookCount()),
 				equalTo("author.bookCount"));
+	}
+
+	@Test
+	@Ignore
+	public void getter_of_final_class() {
+		assertThat(prop(of(Book.class).getAuthor().getName().getBytes()),
+				equalTo("author.name.bytes"));
 	}
 
 }
