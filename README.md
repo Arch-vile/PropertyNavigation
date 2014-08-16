@@ -46,3 +46,12 @@ Use:
 
 
 [Tests](https://github.com/ra1p3/PropertyNavigation/blob/master/src/test/java/com/moonillusions/propertynavigation/PropertyNavigationTest.java)
+
+
+**Known issues**
+Wont work for final classes in the middle of the path. E.g. in
+>prop(on(Person.class).getName().getBytes)
+where getName() returns a String which is final.
+
+
+
