@@ -17,6 +17,12 @@ Say you have a Book class that has Author as class variable (accessable by gette
 
 Will return string "author.name".
 
+If you want to include the root element in the returned property use:
+
+>prop(to(Book.class).getAuthor().getName())
+
+Whic returns string "book.author.name"
+
 **Application examples**
 
 Wicket:
