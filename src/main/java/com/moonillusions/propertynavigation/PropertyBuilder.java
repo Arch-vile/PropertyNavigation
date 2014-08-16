@@ -2,6 +2,7 @@ package com.moonillusions.propertynavigation;
 
 import java.lang.reflect.Method;
 
+import com.moonillusions.propertynavigation.utils.CamelCaseStringUtils;
 import com.moonillusions.propertynavigation.utils.MethodNameStringUtils;
 
 public class PropertyBuilder {
@@ -13,9 +14,9 @@ public class PropertyBuilder {
 	}
 
 	public void setRoot(Class clazz) {
-		path.setLength(0);
-		// path.append(CamelCaseStringUtils.startWithLowerCase(clazz
-		// .getSimpleName()));
+		clear();
+		path.append(CamelCaseStringUtils.startWithLowerCase(clazz
+				.getSimpleName()));
 	}
 
 	public void append(Method method) {
@@ -26,6 +27,10 @@ public class PropertyBuilder {
 
 	public String toProperty() {
 		return path.toString();
+	}
+
+	public void clear() {
+		path.setLength(0);
 	}
 
 }

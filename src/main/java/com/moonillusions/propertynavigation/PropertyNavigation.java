@@ -21,6 +21,11 @@ public class PropertyNavigation {
 	}
 
 	public static <T> T of(Class<T> clazz) {
+		getPathBuilder().clear();
+		return navigate(clazz);
+	}
+
+	public static <T> T to(Class<T> clazz) {
 		getPathBuilder().setRoot(clazz);
 		return navigate(clazz);
 	}

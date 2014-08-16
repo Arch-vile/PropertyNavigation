@@ -18,7 +18,6 @@ public class PropertyBuilderTest {
 	@Before
 	public void init() throws SecurityException, NoSuchMethodException {
 		builder = new PropertyBuilder();
-		builder.setRoot(Book.class);
 		getter1 = Book.class.getMethod("getAuthor", null);
 		getter2 = Book.class.getMethod("getPageCount", null);
 	}
@@ -34,6 +33,20 @@ public class PropertyBuilderTest {
 		builder.append(getter1);
 		builder.append(getter2);
 		assertThat(builder.toProperty(), equalTo("author.pageCount"));
+	}
+
+	@Test
+	public void root_appended() {
+		builder.setRoot(Book.class);
+		builder.append(getter1);
+		assertThat(builder.toProperty(), equalTo("book.author"));
+	}
+
+	@Test
+	public void clear() {
+		builder.append(getter1);
+		builder.clear();
+		assertThat(builder.toProperty(), equalTo(""));
 	}
 
 }
