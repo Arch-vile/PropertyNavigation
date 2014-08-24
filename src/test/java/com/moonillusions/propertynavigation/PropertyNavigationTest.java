@@ -51,6 +51,20 @@ public class PropertyNavigationTest {
 	}
 
 	@Test
+	public void to_concrete_classes() {
+		Book book = new Book();
+		assertThat(prop(to(book).getAuthor().getBookCount()),
+				equalTo("book.author.bookCount"));
+	}
+
+	@Test
+	public void of_concrete_classes() {
+		Book book = new Book();
+		assertThat(prop(of(book).getAuthor().getBookCount()),
+				equalTo("author.bookCount"));
+	}
+
+	@Test
 	@Ignore
 	public void getter_of_final_class() {
 		assertThat(prop(of(Book.class).getAuthor().getName().getBytes()),

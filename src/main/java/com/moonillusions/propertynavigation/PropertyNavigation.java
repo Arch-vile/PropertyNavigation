@@ -25,12 +25,24 @@ public class PropertyNavigation {
 		return navigate(clazz);
 	}
 
+	public static <T> T of(T object) {
+		Class<T> clazz = (Class<T>) object.getClass();
+		getPathBuilder().clear();
+		return navigate(clazz);
+	}
+
 	public static <T> T to(Class<T> clazz) {
 		getPathBuilder().setRoot(clazz);
 		return navigate(clazz);
 	}
 
-	public static <T> T navigate(Class<T> clazz) {
+	public static <T> T to(T object) {
+		Class<T> clazz = (Class<T>) object.getClass();
+		getPathBuilder().setRoot(clazz);
+		return navigate(clazz);
+	}
+
+	private static <T> T navigate(Class<T> clazz) {
 
 		Enhancer enhancer = new Enhancer();
 		enhancer.setSuperclass(clazz);
@@ -40,6 +52,16 @@ public class PropertyNavigation {
 			@Override
 			public Object intercept(Object obj, Method method, Object[] args,
 					MethodProxy proxy) throws Throwable {
+
+				if (method.getReturnType().getCanonicalName()
+						.equals("groovy.lang.MetaClass")) {
+					return proxy.invokeSuper(obj, args);
+				}
+
+				if (method.getName().equals("invokeMethod")) {
+					throw new NoSuchMethodError("No such method: " + args[0]);
+				}
+
 				getPathBuilder().append(method);
 
 				if (Modifier.isFinal(method.getReturnType().getModifiers())) {
