@@ -47,7 +47,7 @@ Instead of:
 
 Use:
 
-`<g:textField name="${prop(of(Command.class).getPlayer().getName()))}"/>`
+`<g:textField name="${prop(to(Command.class).player.name))}"/>`
   
 
 
