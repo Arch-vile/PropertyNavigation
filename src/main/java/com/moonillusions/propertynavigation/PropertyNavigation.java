@@ -58,6 +58,10 @@ public class PropertyNavigation {
                     return proxy.invokeSuper(obj, args);
                 }
 
+                if (method.getName().equals("setMetaClass")) {
+                    return proxy.invokeSuper(obj, args);
+                }
+
                 if (method.getName().equals("invokeMethod")) {
                     throw new NoSuchMethodError("No such method: " + args[0]);
                 }
