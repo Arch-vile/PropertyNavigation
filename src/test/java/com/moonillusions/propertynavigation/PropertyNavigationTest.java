@@ -16,6 +16,17 @@ public class PropertyNavigationTest {
 		assertThat(prop(of(Book.class).getAuthor()), equalTo("author"));
 	}
 
+	/**
+	 * Note: will not work for dates in Java8.
+	 * http://stackoverflow.com/questions
+	 * /27092857/cglib-throws-an-illegalargumentexception
+	 * -when-enhancing-the-java-util-date-class
+	 */
+	@Test
+	public void test_for_date() {
+		assertThat(prop(of(Book.class).getPublished()), equalTo("published"));
+	}
+
 	@Test
 	public void deep_class() {
 		assertThat(prop(of(Book.class).getAuthor().getAddress()),
